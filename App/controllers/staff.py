@@ -35,7 +35,7 @@ def timeOut(shiftID, time=None):
     if not time:
         time = datetime.now()
 
-    if not shift.timedIn:
+    if not shift.timedOut:
         shift.timedOut = time
     else:
         return "Already Timed Out"

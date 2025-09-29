@@ -31,10 +31,10 @@ class Shift(db.Model):
     def get_json(self):
         return{
             'id': self.id,
-            'staffID' : self.staffID,
-            'adminID' : self.adminID,
-            'shiftStart' : self.shiftStart.strftime("%d/%m/%Y %H:%M"),
-            'shiftEnd' : self.shiftEnd.strftime("%d/%m/%Y %H:%M"),
-            'timedIn' : self.timedIn.strftime("%d/%m/%Y %H:%M") if self.timedIn else None,
-            'timedOut' : self.timedOut.strftime("%d/%m/%Y %H:%M") if self.timedOut else None
+            'staffID': self.staffID,
+            'adminID': self.adminID,
+            'shiftStart': self.shiftStart.strftime("%d/%m/%Y %H:%M"),
+            'shiftEnd': self.shiftEnd.strftime("%d/%m/%Y %H:%M"),
+            'timedIn': self.timedIn.strftime("%d/%m/%Y %H:%M") if self.timedIn else None,
+            'timedOut': self.timedOut.strftime("%d/%m/%Y %H:%M") if self.timedOut else None
         }
