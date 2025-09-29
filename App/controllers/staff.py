@@ -55,8 +55,9 @@ def getStaff(id):
     return db.session.get(Staff, id)
 
 def deleteStaff(id):
-    staff = staff.query.get(id)
+    staff = Staff.query.get(id)
     if not staff:
-        return None
+        return print("Failed to Delete Staff")
     db.session.delete(staff)
     db.session.commit()
+    print("Staff Deleted")
