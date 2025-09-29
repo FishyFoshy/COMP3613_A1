@@ -162,7 +162,7 @@ def get_admin_command():
         print("Invalid Admin ID")
         return
     else:
-        print(f'ID: {admin.id}, Name: {admin.name}\n')
+        print(admin.get_json())
 
 @admin_cli.command("list_staff", help="Show all staff")
 def list_staff_command():
@@ -177,7 +177,7 @@ def get_staff_command():
         print("Invalid Staff ID")
         return
     else:
-        print(f'ID: {staff.id}, Name: {staff.name}\n')
+        print(staff.get_json())      
 
 @admin_cli.command("create_report", help="Creates Shift Report")
 def create_report_command():

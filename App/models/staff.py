@@ -15,7 +15,7 @@ class Staff(db.Model):
         return{
             'id': self.id,
             'name': self.name,
-            'shifts': [shift.get_json() for shift in self.Shifts]
+            'shifts': [shift.get_json() for shift in self.shifts]
         }
 
     def set_password(self, password):
