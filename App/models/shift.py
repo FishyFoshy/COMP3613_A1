@@ -1,13 +1,13 @@
 from App.database import db
 from datetime import datetime
 
-class Staff(db.Model):
+class Shift(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     staffID = db.Column(db.Integer, db.ForeignKey('staff.id'), nullable=False)
     adminID = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
     shiftStart = db.Column(db.DateTime, nullable=False)
-    shiftEnd = db.Column(db.DateTime, nullabe=False)
-    timedIn = db.Column(db.DateTime, nullable=True)
+    shiftEnd = db.Column(db.DateTime, nullable=False)
+    timedIn = db.Column(db.DateTime)
     timedOut = db.Column(db.DateTime)
 
     def __init__(self, staffID, adminID, shiftStart, shiftEnd):

@@ -2,9 +2,12 @@ import click, pytest, sys
 from flask.cli import with_appcontext, AppGroup
 
 from App.database import db, get_migrate
-from App.models import User
+from App.models import User, Staff, Admin, Shift, Report
 from App.main import create_app
-from App.controllers import ( create_user, get_all_users_json, get_all_users, initialize )
+from App.controllers import (
+    create_user, get_all_users_json, get_all_users, initialize,
+    createStaff, timeIn, timeOut, getAllStaff, getStaff, deleteStaff
+    )
 
 
 # This commands file allow you to create convenient CLI commands for testing controllers
@@ -47,6 +50,52 @@ def list_user_command(format):
         print(get_all_users_json())
 
 app.cli.add_command(user_cli) # add the group to the cli
+
+'''
+Staff Commands
+'''
+
+staff_cli = AppGroup('staff', help="Staff object commands")
+
+@staff_cli.command("create", help="Creates a staff object")
+@click.argument("name", default="Jeremy")
+@click.argument("password", default="jpass")
+def create_staff_command(name, password):
+    staff = createStaff(name, password)
+
+    if not staff:
+        print("Could not create staff object")
+    else:
+        print(f'Staff member {staff.name} created')
+
+@staff_cli.command("time_in", help="Time in to a shift")
+def time_in_command():
+    shiftID = click.prompt(f'Enter a shift ID to time in: ', type=int)
+    string = timeIn(shiftID)
+    print(string)
+
+@staff_cli.command("time_out", help="Time out of a shift")
+def time_in_command():
+    shiftID = click.prompt(f'Enter a shift ID to time out: ', type=int)
+    string = timeOut(shiftID)
+    print(string)
+
+@staff_cli.command("list", help="Show all staff")
+def list_staff_command():
+    print(getAllStaff())
+
+@staff_cli.command("find", help="Find a particular Staff Member")
+def get_staff_command():
+    staffID = click.prompt("Enter a staff id: ", type=int)
+    staff = getStaff(staffID)
+    
+    if not staff:
+        print("Invalid Staff ID")
+        return
+    else:
+        print(f'ID: {staff.id}, Name: {staff.name}\n')
+
+app.cli.add_command(staff_cli)
 
 '''
 Test Commands
